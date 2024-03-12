@@ -274,15 +274,15 @@ Html 部分
 
 ---
 
-## 1. 组件使用
+## 2. 组件使用
 
 > 常见的一个 'BlockContent' 卡片组件 下面我将讲解它：
 
-### 1.1 BlockContent 组件
+### 2.1 BlockContent 组件
 
 > 该组件一个卡片组件，头部分为左右两部分，分别对应组件的标题和右侧图标，下面是卡片内容
 
-#### 1.1.1 组件的基础使用
+#### 2.1.1 组件的基础使用
 > 首先在头文件位置导入 BlockContent 组件.
 
 ```JavaScript
@@ -309,21 +309,25 @@ const ExtraImage =()=><Image src={arrow_right_grey} className={styles.card_image
  ```
  > 基础用法是传title、extra、和卡片内容，三个插槽分别对应左侧标题、右侧图标和卡片内容、如果不传则不显示
 
-## 2. 组件使用
+## 3. 组件使用
 
 > 常见的一个组件 `Cell组件` ,下面我会讲解如何使用这个组件。
 
-### 2.1 Cell 组件
+### 3.1 Cell 组件
 
 > 该组件用于展示列表中的单个元素，包括左侧图标和标题，右侧副标题、小红点、右箭头，同时支持点击事件处理。其中副标题、小红点、右箭头为可选的内容。
 
-#### 2.1.1 组件的基础使用
+#### 3.1.1 组件的基础使用
 
-> 首先在头文件位置导入 Cell 组件.
+> 首先在头文件位置导入 Cell 组件、自定义样式（可选）和 Cell 所需的 icon
 
 ```javascript
 //导入Cell组件
 import Cell from "../../components/Cell";
+//导入自定义样式
+import styles from "./index.module.less";
+//导入Cell的icon
+import Icon from "../../assets/xxx.png";
 ```
 
 > 然后定义需要使用的一些数据
@@ -332,19 +336,19 @@ import Cell from "../../components/Cell";
  // 模拟数据，包含单元格的各种信息
 const cellData = [
     {
-      icon: "iconName1.png",
+      icon: "Icon", //图标用import导入
       title: "Example Cell 1",
       subTitle: "This is a subtitle",
       showRedDot: true,// 显示小红点
       showArrowIcon: true, // 显示右箭头,
-      cellClassName: "cell-margin-top",//自定义Cell组件样式类名
+      cellClassName: styles.cell_margin_top,//自定义Cell组件样式类名
       onClick: () => {
         // 示例点击事件
         console.log("Cell 1 clicked ");
       },
     },
     {
-      icon: "iconName2.png",
+      icon: "Icon",
       title: "Example Cell 2",
       subTitle: "", // 无副标题内容
       showRedDot: false,// 不显示小红点
@@ -366,4 +370,89 @@ const cellData = [
         <Cell key={index} data={item}/>
       ))}
     </div>
+```
+
+## 4. 组件使用
+
+> 常见的一个 `Pop弹窗组件`，下面是具体使用说明。
+
+### 4.1 Pop 弹窗组件
+
+> 该组件用于绑定在需要触发弹窗的元素或组件上，可触发的弹窗包括提示弹窗和确认弹窗，其中提示弹窗只包含信息的确认按钮，确认弹窗包含信息的确认与取消按钮，同时，其各自包含的确认与取消按钮均支持点击事件处理。
+
+#### 4.1.1 组件的使用
+
+> 首先在头文件位置导入 Pop 组件.
+```javascript
+//导入Cell组件
+import Pop from '../../components/modal/modal';
+```
+
+> 然后定义需要触发的确认或取消事件
+```javascript
+const handleConfirm = () => {  
+    console.log('用户点击了确认');  
+    // 执行其他操作，比如关闭弹窗、更新状态等  
+  };  
+  
+  const handleCancel = () => {  
+    console.log('用户点击了取消');  
+    // 执行其他操作，比如关闭弹窗、更新状态等  
+  }; 
+```
+
+> 调用 Pop 组件，并传递所需参数
+```javascript
+<div>  
+  {/* 使用自定义的触发内容 */}  
+  <Pop  
+    // modalType 默认为提示弹窗，若传入参数"confirm"可切换为确认弹窗
+    // modalType="confirm"  
+    title="确认操作"  
+    content="你确定要执行这个操作吗？"  
+    confirmText="我知道了"  
+    // 当弹窗类型为提示弹窗时，取消按钮文本及取消事件回调均不会生效
+    cancelText="取消"  
+    onConfirm={handleConfirm}  
+    onCancel={handleCancel}  
+    // 绑定触发元素或组件
+    triggerContent={<button>点击显示弹窗</button>}  
+  />  
+</div> 
+```
+
+## 5. 组件使用
+
+> 一个数据展示组件,下面我会讲解如何使用这个组件。
+
+### 5.1 DataDisplay 组件
+
+> 该组件用于展示数据,未登录状态下展示'--'，无数量时展示0（0.00），超过万展示'X.x万+'。整数与小数部分展示不同的样式。
+
+#### 5.1.1 组件的基础使用
+
+> 首先在头文件位置导入 DataDisplay 组件、自定义样式（可选）。
+
+```javascript
+//导入DataDisplay组件
+import { DataDisplay } from '../../../components/DataDisplay';
+//导入自定义样式
+import styles from "./index.module.less";
+```
+
+> 需要使用的一些数据
+
+```JavaScript
+
+ data{string | number} - 传入的数值
+ [isLogin]{boolean} - 是否为登录状态
+ [flag]{boolean} - 是否展示金额符号￥
+ [cname]{string} - 自定义样式类名
+ 
+```
+
+> 调用 DataDisplay 组件，并传递所需数据
+
+```JavaScript
+    <DataDisplay data={discountInfo.coupon} flag={true} />
 ```

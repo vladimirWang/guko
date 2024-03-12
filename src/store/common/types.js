@@ -1,0 +1,1 @@
+export const ACTIVETAB = 'ACTIVETAB'; //示例
