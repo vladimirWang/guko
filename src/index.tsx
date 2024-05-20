@@ -6,11 +6,10 @@
  * @FilePath: /guko/src/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import React from 'react'
-import ReactDOM from 'react-dom/client'
 import 'normalize.css'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import App from './App.tsx'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 // import { Provider } from 'react-redux'
 // import store from './store/index'
 // import AuthRoute from './router/authRoute.jsx'
@@ -19,14 +18,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 // root.render(<App />)
 root.render(
-  <BrowserRouter>
+  <HashRouter>
     <App />
-    {/* <Routes>
-      <Route path="/login" element={<h3>login</h3>} />
-      <Route path="*" element={<Navigate to="/login" />} />
-    </Routes> */}
-  </BrowserRouter>,
+  </HashRouter>,
 )
-{
-  /* <Provider store={store}> */
-}

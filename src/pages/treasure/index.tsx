@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Treasure() {
   return <div>财富</div>
 }
