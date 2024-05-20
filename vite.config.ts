@@ -20,6 +20,6 @@ const envResolver = {
 /** @type import("vite").UserConfig */
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  console.log(mode, '--env')
+  console.log(mode, env.NODE_ENV, '--env')
   return envResolver[command]
 })
