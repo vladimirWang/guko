@@ -8,17 +8,17 @@ const { Item, useForm } = Form
 
 const initialValues = {
   username: 'wang',
+  password: '123456',
 }
 export default function Login() {
   const [visible, setVisible] = useState(false)
   const [form] = useForm()
-  const { getFieldsValue, submit } = form
+  const { getFieldsValue } = form
   const onSubmit = async () => {
     try {
       const params = await getFieldsValue()
-      console.log(params, 'pasmfs')
       const resp = await userLogin(params)
-      console.log(resp, 'login resp')
+      console.log(resp, '============login resp=============')
 
       // submit
     } catch (error: any) {
@@ -46,7 +46,8 @@ export default function Login() {
             <Input />
           </Item>
           <Item name="password" label="密码" rules={[{ required: true, message: '密码必填' }]}>
-            <div className={styles.password}>
+            <Input className={styles.input} placeholder="请输入密码" type={true ? 'text' : 'password'} />
+            {/* <div className={styles.password}>
               <Input className={styles.input} placeholder="请输入密码" type={visible ? 'text' : 'password'} />
               <div className={styles.eye}>
                 {!visible ? (
@@ -55,7 +56,7 @@ export default function Login() {
                   <EyeOutline onClick={() => setVisible(false)} />
                 )}
               </div>
-            </div>
+            </div> */}
           </Item>
         </div>
       </Form>

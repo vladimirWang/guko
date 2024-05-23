@@ -2,5 +2,5 @@ import http from '../utils/http'
 
 console.log(http, '---http---')
 export function userLogin(data: any) {
-  return 1
+  return http.post('/user/login', data)
 }
