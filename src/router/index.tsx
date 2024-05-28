@@ -11,7 +11,7 @@ import NotFound from '../pages/notFound'
 const routes = [
   {
     path: '/',
-    element: <Navigate to="/diary" />,
+    element: <Navigate to="/login" />,
   },
   {
     path: '/login',

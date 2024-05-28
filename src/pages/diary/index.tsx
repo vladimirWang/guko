@@ -1,9 +1,20 @@
 import { useEffect } from 'react'
+import { userLogin } from '../../api/user'
+import { Button } from 'antd-mobile'
 
 function diary() {
   useEffect(() => {}, [])
   return (
     <div className="discounts">
+      <Button
+        onClick={() => {
+          userLogin({ code: 1 }).then((res) => {
+            console.log(res, '---user login')
+          })
+        }}
+      >
+        fetch user
+      </Button>
       日记
       {/* 标题栏 */}
       {/* 优惠信息汇总 */}

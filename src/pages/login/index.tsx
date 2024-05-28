@@ -2,7 +2,7 @@ import { Button, Form, Input } from 'antd-mobile'
 import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons'
 import { useState } from 'react'
 import styles from './login.module.less'
-import { userLogin } from '../../api/user'
+import { userLogin, testJwt } from '../../api/user'
 
 const { Item, useForm } = Form
 
@@ -41,6 +41,17 @@ export default function Login() {
           <img src="/logo192.png" width={100} />
         </div>
 
+        <Button
+          block
+          onClick={() => {
+            testJwt().then((res) => {
+              console.log('jwt: ', res)
+            })
+          }}
+          color="primary"
+        >
+          测试jwt
+        </Button>
         <div className={styles.main}>
           <Item name="username" label="用户名" rules={[{ required: true, message: '用户名必填' }]}>
             <Input />
