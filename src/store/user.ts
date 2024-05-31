@@ -16,28 +16,30 @@ function sleep(ms = 2000) {
 }
 
 type State = {
-  firstName: string
-  lastName: string
+  id: number
+  username: string
 }
 
 type Action = {
-  updateFirstName: (value: State['firstName']) => void
-  updateLastName: (value: State['lastName']) => void
-  asyncUpdateFirstName: (value: State['lastName']) => void
+  // updateUsername: (value: State['username']) => void
+  updateUserInfo: (value: State) => void
+  // updateLastName: (value: State['lastName']) => void
+  // asyncUpdateFirstName: (value: State['lastName']) => void
 }
 
-export const usePersonStore = create<State & Action>((set) => ({
-  firstName: '',
-  lastName: '',
-  updateFirstName: (firstName) => {
+export const useUserStore = create<State & Action>((set) => ({
+  username: '',
+  id: -1,
+  // lastName: '',
+  updateUserInfo: (userInfo) => {
     // set(() => ({ firstName }))
-    set({ firstName })
+    set(userInfo)
   },
-  updateLastName: (lastName) => {
-    set(() => ({ lastName }))
-  },
-  asyncUpdateFirstName: async (firstName) => {
-    await sleep()
-    set({ firstName })
-  },
+  // updateLastName: (lastName) => {
+  //   set(() => ({ lastName }))
+  // },
+  // asyncUpdateFirstName: async (firstName) => {
+  //   await sleep()
+  //   set({ firstName })
+  // },
 }))
