@@ -8,10 +8,19 @@ const http = axios.create({
 })
 
 http.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
   return config
 })
 
 http.interceptors.response.use((resp) => {
+  if (resp.config.url === '/user/login') {
+    const token = resp.headers.token
+    console.log('---token---', token)
+    localStorage.setItem('token', token)
+  }
   return resp.data
 })
 

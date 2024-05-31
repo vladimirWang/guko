@@ -2,13 +2,13 @@ import { Button, Form, Input } from 'antd-mobile'
 import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons'
 import { useState } from 'react'
 import styles from './login.module.less'
-import { userLogin, testJwt } from '../../api/user'
+import { userLogin, testJwt, userProfile } from '../../api/user'
 
 const { Item, useForm } = Form
 
 const initialValues = {
-  username: 'wang',
-  password: '123456',
+  username: 'john',
+  password: 'changeme',
 }
 export default function Login() {
   const [visible, setVisible] = useState(false)
@@ -27,6 +27,15 @@ export default function Login() {
   }
   return (
     <div className={styles.loginPage}>
+      <button
+        onClick={() => {
+          userProfile().then((res) => {
+            console.log(res, '---user profile')
+          })
+        }}
+      >
+        profile
+      </button>
       <Form
         form={form}
         initialValues={initialValues}
