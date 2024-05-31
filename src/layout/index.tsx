@@ -28,7 +28,8 @@ const Layout = (props: PropsWithChildren) => {
   //   )
   return (
     <div>
-      {children}
+      {/* {children} */}
+      <Outlet />
       <div className={styles.tabbar}>
         <TabBar activeKey={pathname} onChange={setRouteActive}>
           {tabs.map((item) => (

@@ -3,6 +3,7 @@ import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons'
 import { useState } from 'react'
 import styles from './login.module.less'
 import { userLogin, testJwt, userProfile } from '../../api/user'
+import { useNavigate } from 'react-router-dom'
 
 const { Item, useForm } = Form
 
@@ -12,14 +13,15 @@ const initialValues = {
 }
 export default function Login() {
   const [visible, setVisible] = useState(false)
+  const navigate = useNavigate()
   const [form] = useForm()
   const { getFieldsValue } = form
   const onSubmit = async () => {
     try {
       const params = await getFieldsValue()
       const resp = await userLogin(params)
-      console.log(resp, '============login resp=============')
-
+      console.log(resp, navigate, '============login resp=============')
+      navigate('/mine')
       // submit
     } catch (error: any) {
       console.log(error.message, '---异常')

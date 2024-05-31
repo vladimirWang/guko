@@ -16,6 +16,11 @@ http.interceptors.request.use((config) => {
 })
 
 http.interceptors.response.use((resp) => {
+  console.log(resp.status, '---resp')
+  const status = resp.status
+  if (status === 401) {
+    window.location.href = '/login'
+  }
   if (resp.config.url === '/user/login') {
     const token = resp.headers.token
     console.log('---token---', token)

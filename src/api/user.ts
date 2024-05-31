@@ -1,4 +1,5 @@
 import http from '../utils/http'
+import { getToken } from '../utils/token'
 
 console.log(http, '---http---')
 export function userLogin(data: any) {
@@ -8,8 +9,15 @@ export function userLogin(data: any) {
 }
 
 export function userProfile() {
-  console.log('1')
-  return http.get('/user/profile')
+  const token = getToken()
+  console.log('1', token)
+  // return http.get('/user/profile')
+  return fetch('/api/user/profile', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  // .then((res) => res.json())
   // return http.get('/book/list', data)
 }
 

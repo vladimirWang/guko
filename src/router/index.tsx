@@ -7,6 +7,7 @@ import Moment from '../pages/moment'
 import Layout from '../layout'
 import Login from '../pages/login'
 import NotFound from '../pages/notFound'
+import Private from './private'
 
 const routes = [
   {
@@ -18,29 +19,28 @@ const routes = [
     element: <Login />,
   },
   {
-    path: '/diary',
+    path: '/',
     element: (
-      <Layout>
-        <Diary />
-      </Layout>
+      <Private>
+        <Layout />
+      </Private>
     ),
+    children: [
+      {
+        path: '/diary',
+        element: <Diary />,
+      },
+      {
+        path: '/moment',
+        element: <Moment />,
+      },
+      {
+        path: '/mine',
+        element: <Mine />,
+      },
+    ],
   },
-  {
-    path: '/moment',
-    element: (
-      <Layout>
-        <Moment />
-      </Layout>
-    ),
-  },
-  {
-    path: '/mine',
-    element: (
-      <Layout>
-        <Mine />
-      </Layout>
-    ),
-  },
+
   {
     path: '/404',
     element: <NotFound />,
